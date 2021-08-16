@@ -1,2 +1,2 @@
 # Team-Scrum-Group6
-Trading Investment Appraisal Algorithm for Financial Analytics
+Women Techsters Final Project Group 6 2021
