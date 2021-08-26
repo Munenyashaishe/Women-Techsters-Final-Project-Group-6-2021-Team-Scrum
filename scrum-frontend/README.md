@@ -2,6 +2,21 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+# Folder structure
+1.  All components should be in the components folder. A component is a folder with its own jsx and css file. Use classes in your css file. Name your css files to end with .module.css. An example is shown in the component folder.
+2. All pages should be in the pages folder
+3. Store folder contains data files
+4. Images folder contains all images
+5. Uitls folder contains all utility and helper functions
+6. Hooks folder contains all custom hooks
+
+# Contributors
+1. Evelyn Anyebe
+2. Remilekun Odegbami
+3. Gbemisola Kotoye
+4. Immaculate Nkemogeleng
+5. Vivian Nzekwe
+
 ## Available Scripts
 
 In the project directory, you can run:
