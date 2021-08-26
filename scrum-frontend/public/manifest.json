@@ -1,6 +1,8 @@
 {
   "short_name": "ITIAA App",
+
   "name": "ITIAA - Impact Trading Investment Appraisals Analytics",
+
   "icons": [
     {
       "src": "favicon.ico",
