@@ -200,11 +200,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\Scrum-Backend\\ITIAABackend.API\\ITIAABackend.API.csproj",
+      "projectUniqueName": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\ITIAABackend.API\\ITIAABackend.API.csproj",
       "projectName": "ITIAABackend.API",
-      "projectPath": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\Scrum-Backend\\ITIAABackend.API\\ITIAABackend.API.csproj",
+      "projectPath": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\ITIAABackend.API\\ITIAABackend.API.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\Scrum-Backend\\ITIAABackend.API\\obj\\",
+      "outputPath": "C:\\Users\\user\\dev\\Women-Techsters-Final-Project-Group-6-2021-Team-Scrum\\ITIAABackend.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
