@@ -6,10 +6,10 @@ USE itiaa;
 
 CREATE TABLE roles 
 (
-  role_id INT PRIMARY KEY IDENTITY(1,1),
-  role_name VARCHAR(45) NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NULL,
+  RoleId INT PRIMARY KEY IDENTITY(1,1),
+  RoleName VARCHAR(45) NOT NULL,
+  CreatedAt DATETIME NOT NULL,
+  UpdatedAt DATETIME NULL,
 )
 
 -- Dropping Tables (deleting tables)
@@ -17,17 +17,17 @@ CREATE TABLE roles
 
 
 --Read using Select
-SELECT * FROM roles;
+SELECT * FROM Roles;
 
 -- Insert into roles
-INSERT INTO roles(role_name, Created_At, Updated_At ) Values ('Manager', '', '');
+INSERT INTO Roles(RoleName, CreatedAt, UpdatedAt ) Values ('Manager', '', '');
 
 
 -- Select roles by ID
-SELECT * FROM Roles WHERE role_id = '';
+SELECT * FROM Roles WHERE RoleId = '';
 
 -- Update role by id
-UPDATE roles SET role_name = 'Cook' WHERE role_Id = 1;
+UPDATE Roles SET RoleName = 'Cook' WHERE RoleId = 1;
 
 -- Delete role by ID
-DELETE FROM roles WHERE role_Id = 5;
+DELETE FROM Roles WHERE RoleId = 5;

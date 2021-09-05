@@ -1,7 +1,10 @@
+using ITIAABackend.API.Models;
+using ITIAABackend.API.Services.Role;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -28,10 +31,18 @@ namespace ITIAABackend.API
         {
 
             services.AddControllers();
+
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<ItiaaDbContext>(options => options.UseSqlServer(connectionString));
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ITIAABackend.API", Version = "v1" });
             });
+
+            services.AddAutoMapper(typeof(Startup));
+
+            services.AddScoped<IRoleService, RoleService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
