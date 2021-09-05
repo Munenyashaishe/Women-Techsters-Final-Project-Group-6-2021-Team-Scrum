@@ -1,0 +1,42 @@
+
+
+form{
+    margin-left: 15%;
+    width: 70%;
+    font-family: sans-serif;
+}
+
+h1 {
+    font-size: 36px;
+    font-weight: medium;
+    padding-bottom: 5%;
+    margin-top: 20px;
+}
+
+.form-control{
+    background-color: rgb(218, 232, 251);
+    outline: none;
+    border: none;
+}
+
+.btn{
+    background-color: #4884FB;
+}
+
+.btn:hover{
+    background-color: #3461BB;
+}
+
+@media screen and (max-width:800px) {
+    form{
+        width: 70%;
+        margin-left: 120px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    form{
+        width: 100%;
+        margin-left: 0;
+    }
+}
