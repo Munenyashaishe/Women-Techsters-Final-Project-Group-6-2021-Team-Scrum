@@ -4,9 +4,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ITIAABackend.API.Data;
 using ITIAABackend.API.Models;
+using ITIAABackend.API.Dtos;
 using Microsoft.EntityFrameworkCore;
+using ITIAABackend.API.Services.Role;
+using ITIAABackend.API.Dtos.Role;
 
 namespace ITIAABackend.API.Controllers
 {
@@ -14,106 +16,74 @@ namespace ITIAABackend.API.Controllers
     [ApiController]
     public class RoleController : ControllerBase
     {
-        private ItiaaDbContext _dbContext;
+        private readonly IRoleService _roleService;
 
-            public RoleController(ItiaaDbContext dbContext)
+        public RoleController(IRoleService roleService)
             {
-                _dbContext = dbContext;
+                _roleService = roleService;
             }
 
-            [HttpGet("GetRoles")]
-            public IActionResult Get()
+            [HttpGet]
+            public async Task<ActionResult> Get()
             {
-                try
-                {
-                    var roles = _dbContext.roles.ToList();
+                 var response= await _roleService.GetAllRoles();
 
-                    if (roles.Count == 0)
+                if (response.StatusCode == 200)
                     {
-                        return StatusCode(404, "No role found");
+                        return Ok(response); 
                     }
-                    return Ok(roles);
-                }
-                catch (Exception e)
-                {
-                    return StatusCode(500, "An error occured " + e.Message);
-                }
+                return StatusCode(response.StatusCode,response);
 
             }
 
-            [HttpPost("CreateRole")]
-            public IActionResult Create([FromBody] RoleRequest roleRequest)
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetSingle([FromRoute] int id)
+        {
+            var response = await _roleService.GetRolesById(id);
+
+            if (response.StatusCode == 200)
             {
-                try
-                {
-                    Roles role = new Roles();
-                    role.RoleName = roleRequest.RoleName;
-                    role.CreatedAt = roleRequest.CreatedAt;
-                    role.UpdatedAt = roleRequest.UpdatedAt;
-
-
-                    _dbContext.roles.Add(role);
-                    _dbContext.SaveChanges();
-
-                    
-                    return Ok(role);
-                }
-                catch (Exception e)
-                {
-                    return StatusCode(500, "An error occured " + e.Message);
-                }
-
+                return Ok(response);
             }
+            return StatusCode(response.StatusCode, response);
 
-            [HttpPut("UpdateRoles")]
-            public IActionResult Update([FromBody] RoleRequest roleRequest)
+        }
+
+            [HttpPost]
+            public async Task<IActionResult> Create([FromBody] AddRoleDto roleRequest)
             {
-                try
-                {
-                    var role = _dbContext.roles.FirstOrDefault(x => x.RoleId == roleRequest.RoleId);
-                    if (role == null)
-                    {
-                        return StatusCode(404, "No customer found");
-                    }
+            var response = await _roleService.AddRole(roleRequest);
 
-                    role.RoleName = roleRequest.RoleName;
-                    role.UpdatedAt = roleRequest.UpdatedAt;
-
-                    _dbContext.Entry(role).State = EntityState.Modified;
-                    _dbContext.SaveChanges();
-                  
-                    return Ok(role);
-                }
-                catch (Exception e)
-                {
-                    return StatusCode(500, "An error occured " + e.Message);
-                }
-
-            }
-
-
-            [HttpDelete("DeleteUser/{Id}")]
-            public IActionResult Delete([FromRoute] int Id)
+            if (response.StatusCode == 200)
             {
-                try
-                {
-                    var role = _dbContext.roles.FirstOrDefault(x => x.RoleId == Id);
-                    if (role == null)
-                    {
-                        return StatusCode(404, "No customer found");
-                    }
-
-
-                    _dbContext.Entry(role).State = EntityState.Deleted;
-                    _dbContext.SaveChanges();
-
-                   
-                    return Ok(role);
-                }
-                catch (Exception e)
-                {
-                    return StatusCode(500, "An error occured " + e.Message);
-                }
+                return Ok(response);
             }
+            return StatusCode(response.StatusCode, response);
+
+            }
+
+            [HttpPut]
+            public async Task<ActionResult> Update([FromBody] RoleDto roleRequest)
+            {
+            var response = await _roleService.UpdateRole(roleRequest);
+
+            if (response.StatusCode == 200)
+            {
+                return Ok(response);
+            }
+            return StatusCode(response.StatusCode, response);
+        }
+
+            [HttpDelete("{Id}")]
+            public async Task<ActionResult> Delete([FromRoute] int Id)
+            {
+            var response = await _roleService.DeleteRole(Id);
+
+            if (response.StatusCode == 200)
+            {
+                return Ok(response);
+            }
+            return StatusCode(response.StatusCode, response);
+        }
     }
 }
