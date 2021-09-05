@@ -12,84 +12,82 @@ USE itiaa ;
 -- Table itiaa'.user
 -- -----------------------------------------------------
 
-CREATE TABLE users
+CREATE TABLE Users
 (
-  users_id BIGINT PRIMARY KEY IDENTITY(1,1),
-  email VARCHAR(120) NOT NULL,
-  password VARCHAR(120) NOT NULL,
-  first_name VARCHAR(45) NOT NULL,
-  last_name VARCHAR(45) NOT NULL,
-  other_names VARCHAR(120) NULL,
-  gender VARCHAR(45) NULL,
-  phone_number VARCHAR(45) NULL,
-  country_residence VARCHAR(45) NULL,
-  state_residence VARCHAR(45) NULL,
-  city_residence VARCHAR(45) NULL,
-  address VARCHAR(255) NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NULL,
-  status VARCHAR(45) NOT NULL,
-  is_email_verified INT NOT NULL,
-  email_verification_token VARCHAR(255) NULL
+  UsersId BIGINT PRIMARY KEY IDENTITY(1,1),
+  Email VARCHAR(120) NOT NULL,
+  UserPassword VARCHAR(120) NOT NULL,
+  FirstName VARCHAR(45) NOT NULL,
+  LastName VARCHAR(45) NOT NULL,
+  OtherNames VARCHAR(120) NULL,
+  Gender VARCHAR(45) NULL,
+  PhoneNumber VARCHAR(45) NULL,
+  CountryResidence VARCHAR(45) NULL,
+  StateResidence VARCHAR(45) NULL,
+  CityResidence VARCHAR(45) NULL,
+  UserAddress VARCHAR(255) NULL,
+  CreatedAt DATETIME NOT NULL,
+  UpdatedAt DATETIME NULL,
+  UserStatus VARCHAR(45) NOT NULL,
+  IsEmailVerified INT NOT NULL,
+  EmailVerificationToken VARCHAR(255) NULL
   )
 
 
-CREATE UNIQUE INDEX email_UNIQUE ON users (email ASC);
+CREATE UNIQUE INDEX Email_UNIQUE ON Users (Email ASC);
 
 
 -- -----------------------------------------------------
--- Table itiaa.role
+-- Table itiaa.Roles
 -- -----------------------------------------------------
-
 CREATE TABLE roles 
 (
-  role_id INT PRIMARY KEY IDENTITY(1,1),
-  role_name VARCHAR(45) NOT NULL,
-  created_at DATETIME NOT NULL,
-  updated_at DATETIME NULL,
+  RoleId INT PRIMARY KEY IDENTITY(1,1),
+  RoleName VARCHAR(45) NOT NULL,
+  CreatedAt DATETIME NOT NULL,
+  UpdatedAt DATETIME NULL,
 )
 
-
 -- -----------------------------------------------------
--- Table itiaa.role_user
+-- Table itiaa.RoleUser
 -- -----------------------------------------------------
-CREATE TABLE role_user (
-  role_user_id INT NOT NULL,
-  users_id BIGINT NOT NULL,
-  role_id INT NOT NULL,
-  PRIMARY KEY (role_user_id),
-  CONSTRAINT fk_role_user_user
-    FOREIGN KEY (users_id)
-    REFERENCES users (users_id)
+CREATE TABLE RoleUser (
+ RoleUserId INT NOT NULL,
+  UsersId BIGINT NOT NULL,
+  RoleId INT NOT NULL,
+  PRIMARY KEY (RoleUserId),
+  CONSTRAINT fk_RoleUser_Users
+    FOREIGN KEY (UsersId)
+    REFERENCES Users (UsersId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_role_user_role1
-    FOREIGN KEY (role_id)
-    REFERENCES roles (role_id)
+  CONSTRAINT fk_RoleUser_Role1
+    FOREIGN KEY (RoleId)
+    REFERENCES Roles (RoleId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-CREATE INDEX fk_role_user_user_idx ON role_user (users_id ASC);
+CREATE INDEX fk_RoleUser_Users_idx ON RoleUser (UsersId ASC);
 
-CREATE INDEX fk_role_user_role1_idx ON role_user (role_id ASC);
+CREATE INDEX fk_RoleUser_Role1_idx ON RoleUser (RoleId ASC);
 
 
 -- -----------------------------------------------------
--- Table itiaa.login_log
+-- Table itiaa.LoginLog
 -- -----------------------------------------------------
 
-CREATE TABLE login_log (
-  login_log_id INT NOT NULL,
-  login_date DATETIME NULL,
-  logout_date DATETIME NULL,
-  status VARCHAR(45) NULL,
-  users_id BIGINT NOT NULL,
-  PRIMARY KEY (login_log_id),
-  CONSTRAINT fk_login_log_user1
-    FOREIGN KEY (users_id)
-    REFERENCES users (users_id)
+CREATE TABLE LoginLog (
+  LoginLogId INT NOT NULL,
+  LoginDate DATETIME NULL,
+  LogoutDate DATETIME NULL,
+  Userstatus VARCHAR(45) NULL,
+  UsersId BIGINT NOT NULL,
+  PRIMARY KEY (LoginLogId),
+  CONSTRAINT fk_LoginLog_User1
+    FOREIGN KEY (UsersId)
+    REFERENCES Users (UsersId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-CREATE INDEX fk_login_log_user1_idx ON login_log (users_id ASC);
+CREATE INDEX fk_LoginLog_User1_idx ON LoginLog (UsersId ASC);
 

@@ -2,43 +2,42 @@
 -- RoleUser
 USE itiaa;
 
-CREATE TABLE role_user (
-  role_user_id INT NOT NULL,
-  users_id BIGINT NOT NULL,
-  role_id INT NOT NULL,
-  PRIMARY KEY (role_user_id),
-  CONSTRAINT fk_role_user_user
-    FOREIGN KEY (users_id)
-    REFERENCES users (users_id)
+CREATE TABLE RoleUser (
+ RoleUserId INT NOT NULL,
+  UsersId BIGINT NOT NULL,
+  RoleId INT NOT NULL,
+  PRIMARY KEY (RoleUserId),
+  CONSTRAINT fk_RoleUser_Users
+    FOREIGN KEY (UsersId)
+    REFERENCES Users (UsersId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT fk_role_user_role1
-    FOREIGN KEY (role_id)
-    REFERENCES roles (role_id)
+  CONSTRAINT fk_RoleUser_Role1
+    FOREIGN KEY (RoleId)
+    REFERENCES Roles (RoleId)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 
-CREATE INDEX fk_role_user_user_idx ON role_user (users_id ASC);
+CREATE INDEX fk_RoleUser_UsersIdx ON RoleUser (UsersId ASC);
 
-CREATE INDEX fk_role_user_role1_idx ON role_user (role_id ASC);
-
+CREATE INDEX fk_RoleUser_Role1_idx ON RoleUser (RoleId ASC);
 
 -- Dropping Tables (deleting tables)
---DROP TABLE role_user;
+--DROP TABLE RoleUser;
 
 
 --Read using Select
-SELECT * FROM role_user LEFT JOIN roles ON role_user.role_id=roles.role_id LEFT JOIN users ON role_user.users_id=users.users_id;
+SELECT * FROM RoleUser LEFT JOIN Roles ON RoleUser.RoleId=Roles.RoleId LEFT JOIN users ON RoleUser.UsersId=users.UsersId;
 
 
--- Select roles by user id
-SELECT * FROM role_user LEFT JOIN roles ON role_user.role_id=roles.role_id WHERE role_user.users_id=1;
+-- Select Roles by user id
+SELECT * FROM RoleUser LEFT JOIN Roles ON RoleUser.RoleId=Roles.RoleId WHERE RoleUser.UsersId=1;
 
--- Insert into role_user
- INSERT INTO role_user(users_id,role_id) VALUES (1,1); 
+-- Insert into RoleUser
+ INSERT INTO RoleUser(UsersId,RoleId) VALUES (1,1); 
 
- -- Update role_user by id
-UPDATE role_user SET role_id = 2 WHERE role_user_id = 1;
+ -- Update RoleUser by id
+UPDATE RoleUser SET RoleId = 2 WHERE RoleUserId = 1;
 
--- Delete role_user by ID
-DELETE FROM role_user WHERE role_user_id = 5;
+-- Delete RoleUser by ID
+DELETE FROM RoleUser WHERE RoleUserId = 5;
